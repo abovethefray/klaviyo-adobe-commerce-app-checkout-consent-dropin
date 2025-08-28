@@ -9,8 +9,8 @@
   
 /* https://cssguidelin.es/#bem-like-naming */
 
-.checkout__content--empty .checkout__email-consent,
-.checkout__content--error .checkout__email-consent {
+.checkout__content--empty .checkout__checkout-consent,
+.checkout__content--error .checkout__checkout-consent {
     display: none !important;
 }
 

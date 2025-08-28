@@ -55,11 +55,20 @@ In your Adobe Commerce Storefront boilerplate repo, locate config.json and add t
 
 ### 2. Install the Drop-in
 
-Install the Drop-in via NPM
+The drop-in package is currently only available via GitHub packages and not in npmjs. Because of this, you will have to setup the following.
 
-```bash
-npm install abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin
-```
+1. In your GitHub, go to **Settings** > **Developer Settings** > **Personal Access Token** > **Tokens (classic)**.
+2. Generate a new personal access token (classic) with atleast the scope of **read:packages** 
+3. Copy the generate token 
+4. In your terminal, run
+   ```bash
+   npm login --scope=@abovethefray --auth-type=legacy --registry=https://npm.pkg.github.com
+   ```
+5. It will ask for your GitHub username and Password which will be your **GENERATED TOKEN**.
+6. After success you should be able to run
+   ```bash
+   npm install @abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin
+   ```
 
 ### 3. Update commerce checkout block JS file from the boilerplate
 
@@ -68,18 +77,18 @@ Currently, there is no other way to install the drop-in without updating the fil
 1. Import the drop-in container
    - ```js
      // Klaviyo
-     import { EmailConsentContainer, KlaviyoApiCreateUpdate } from '../../node_modules/@raldea/email-consent/dist/containers/EmailConsentContainer.js';
+     import { KlaviyoCheckoutConsentContainer, KlaviyoApiCreateUpdate } from '../../node_modules/@abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/dist/containers/KlaviyoCheckoutConsentContainer.js';
      ```
 2. Add an element to hook the container into. In **line 148** you will see the element structure. Insert the code below between **checkout__billing-form** & **checkout__terms-and-conditions**
    - ```html
      <div class="checkout__block checkout__billing-form"></div> // native element
-     <div class="checkout__block checkout__email-consent"></div>
+     <div class="checkout__block checkout__checkout-consent"></div>
      <div class="checkout__block checkout__terms-and-conditions"></div> // native element
      ``` 
 3. Declare a variable that targets the created element. You can add this line below **line 213**
    - ```js
      const $termsAndConditions = checkoutFragment.querySelector('.checkout__terms-and-conditions'); //native code
-     const $emailConsent = checkoutFragment.querySelector('.checkout__email-consent');
+     const $checkoutConsent = checkoutFragment.querySelector('.checkout__checkout-consent');
      ```
 4. Declare a variable that targets the config updates from ```config.json```. You can add below **line 232**.
    - ```js
@@ -88,7 +97,7 @@ Currently, there is no other way to install the drop-in without updating the fil
      ```
 5. Add the drop-in renderer. You can add this above the **TermsAndConditions** render / below **line 459**
    - ```js
-     CheckoutProvider.render(EmailConsentContainer, {
+     CheckoutProvider.render(KlaviyoCheckoutConsentContainer, {
        checked: klaviyoVariables.consent.checked,
        enable_sms_consent: klaviyoVariables.consent.enable_sms_consent,
        enable_email_consent: klaviyoVariables.consent.enable_email_consent,
@@ -97,7 +106,7 @@ Currently, there is no other way to install the drop-in without updating the fil
        sms_consent_name: klaviyoVariables.consent.sms_consent_name,
        email_consent_name: klaviyoVariables.consent.email_consent_name,
        sms_disclosure: klaviyoVariables.consent.sms_disclosure,
-     })($emailConsent),
+     })($checkoutConsent),
      
      CheckoutProvider.render(TermsAndConditions, { // native line of code
      ```
@@ -144,9 +153,9 @@ Currently, there is no other way to install the drop-in without updating the fil
 You need to add the following styles in order to fix some of the display behavior like no item in checkout / error in checkout. Add the code at the top of the file.
 
 ```css
-.checkout__content--empty .checkout__email-consent,
-.checkout__content--error .checkout__email-consent {
-    display: none !important;
+.checkout__content--empty .checkout__checkout-consent,
+.checkout__content--error .checkout__checkout-consent {
+   display: none !important;
 }
 ```
 
