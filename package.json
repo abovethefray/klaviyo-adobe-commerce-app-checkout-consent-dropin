@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "dropin-template",
+  "name": "@abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin",
   "version": "0.1.0",
   "license": "MIT",
   "engines": {
@@ -9,6 +9,10 @@
   "files": [
     "*"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin"
+  },
   "sideEffects": false,
   "scripts": {
     "dev": "concurrently 'npm run storybook' 'npm run serve'",
@@ -20,11 +24,12 @@
     "analyze": "ANALYZE=true elsie build"
   },
   "dependencies": {
-    "@adobe-commerce/elsie": "^1.4.0",
+    "@adobe-commerce/elsie": "^1.4.1",
     "@adobe-commerce/event-bus": "~1.0.0",
     "@adobe-commerce/fetch-graphql": "~1.0.1",
     "@adobe-commerce/storefront-design": "~1.0.0",
     "@dropins/build-tools": "~1.0.1",
+    "jest-environment-jsdom": "^30.1.1",
     "preact": "~10.22.1"
   },
   "devDependencies": {

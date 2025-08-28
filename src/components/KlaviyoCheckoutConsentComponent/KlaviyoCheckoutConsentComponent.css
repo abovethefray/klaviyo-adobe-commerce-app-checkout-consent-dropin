@@ -1,0 +1,29 @@
+/********************************************************************
+ *  Copyright 2025 Adobe
+ *  All Rights Reserved.
+ *
+ * NOTICE:  Adobe permits you to use, modify, and distribute this 
+ * file in accordance with the terms of the Adobe license agreement 
+ * accompanying it. 
+ *******************************************************************/
+  
+/* https://cssguidelin.es/#bem-like-naming */
+
+.checkout__content--empty .checkout__email-consent,
+.checkout__content--error .checkout__email-consent {
+    display: none !important;
+}
+
+/* .klaviyocheckoutconsent-klaviyo-checkout-consent-component { } */
+
+/* Medium (portrait tablets and large phones, 768px and up) */
+/* @media only screen and (min-width: 768px) { } */
+
+/* Large (landscape tablets, 1024px and up) */
+/* @media only screen and (min-width: 1024px) { } */
+
+/* XLarge (laptops/desktops, 1366px and up) */
+/* @media only screen and (min-width: 1366px) { } */
+
+/* XXlarge (large laptops and desktops, 1920px and up) */
+/* @media only screen and (min-width: 1920px) { } */

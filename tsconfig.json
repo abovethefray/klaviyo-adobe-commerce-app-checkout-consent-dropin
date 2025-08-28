@@ -6,9 +6,18 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@adobe-commerce/elsie/*": ["./node_modules/@adobe-commerce/elsie/src/*"]
+      "@adobe-commerce/elsie/*": [
+        "./node_modules/@adobe-commerce/elsie/src/*"
+      ],
+      "@/klaviyocheckoutconsent/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
