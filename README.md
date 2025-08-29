@@ -140,12 +140,12 @@ Currently, there is no other way to install the drop-in without updating the fil
        );
      }
      ```
-7. Declare the function inside ```handlePlaceOrder()```. Insert the code in the first line of the function.
+7. Declare the function inside ```handlePlaceOrder()```. Insert the code after the **displayOverlaySpinner()** function.
    - ```js
      try {
-        await initKlaviyo();
+       await initKlaviyo();
      } catch (error) {
-       console.error(error);
+       console.error('Error executing Klaviyo API:', error);
      }
      ```
 
