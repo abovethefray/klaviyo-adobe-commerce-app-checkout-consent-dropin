@@ -8,5 +8,5 @@
  *******************************************************************/
 export declare const checkIfEmailExist: (email: string, meshApiPoint: string) => Promise<{}>;
 export declare const createProfile: (data: object, meshApiPoint: string) => Promise<{}>;
-export declare const subscribeProfile: (data: object, meshApiPoint: string) => {};
+export declare const subscribeProfile: (data: object, meshApiPoint: string) => Promise<{}>;
 //# sourceMappingURL=klaviyoCheckoutConsentApi.d.ts.map

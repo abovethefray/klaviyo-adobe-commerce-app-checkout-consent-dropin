@@ -140,7 +140,7 @@ Currently, there is no other way to install the drop-in without updating the fil
        );
      }
      ```
-7. Declare the function inside ```handlePlaceOrder()```. Insert it after the native try catch.
+7. Declare the function inside ```handlePlaceOrder()```. Insert the code in the first line of the function.
    - ```js
      try {
         await initKlaviyo();

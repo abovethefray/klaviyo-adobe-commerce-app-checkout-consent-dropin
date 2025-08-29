@@ -68,7 +68,7 @@ export const createProfile = async (
   return result;
 }
 
-export const subscribeProfile = (
+export const subscribeProfile = async (
     data: object,
     meshApiPoint: string
 ) => {
@@ -87,7 +87,7 @@ export const subscribeProfile = (
   }
 
   setEndpoint(meshApiPoint);
-  fetchGraphQl(mutation, variable).then(
+  await fetchGraphQl(mutation, variable).then(
       response => response.data
   ).then(data => {
     result = data;
