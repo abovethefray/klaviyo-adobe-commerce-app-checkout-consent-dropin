@@ -32,7 +32,7 @@ export const checkIfEmailExist = async (
   ).then(data => {
     result = data;
   }).catch(error => {
-    console.error("Error executing GraphQL mutation:", error);
+    console.error("Error executing GraphQL check email:", error);
   });
 
   return result;
@@ -62,7 +62,7 @@ export const createProfile = async (
   ).then(data => {
     result = data;
   }).catch(error => {
-    console.error("Error executing GraphQL mutation:", error);
+    console.error("Error executing GraphQL create profile:", error);
   });
 
   return result;
@@ -92,7 +92,7 @@ export const subscribeProfile = async (
   ).then(data => {
     result = data;
   }).catch(error => {
-    console.error("Error executing GraphQL mutation:", error);
+    console.error("Error executing GraphQL subscribe profile:", error);
   });
 
   return result;
