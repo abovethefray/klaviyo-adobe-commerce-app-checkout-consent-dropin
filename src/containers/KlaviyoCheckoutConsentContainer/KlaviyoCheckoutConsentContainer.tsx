@@ -102,7 +102,7 @@ export const KlaviyoApiCreateUpdate = async (
 
     if (subscribeData.length) {
       for (const subscribe of subscribeData) {
-        subscribeProfile(subscribe, meshApiPoint);
+        await subscribeProfile(subscribe, meshApiPoint);
       }
     }
   }
