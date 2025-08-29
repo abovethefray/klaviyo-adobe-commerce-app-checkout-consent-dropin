@@ -33,8 +33,8 @@ In your Adobe Commerce Storefront boilerplate repo, locate config.json and add t
 "api-mesh-endpoint": "https://edge-sandbox-graph.adobe.io/api/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/graphql",
 "klaviyo": {
    "profileList": {
-      "sms": "SKjK48",
-      "email": "S8iGrv"
+      "sms": "XXXXXX",
+      "email": "YYYYYY"
    },
    "consent": {
       "checked": false,
@@ -50,21 +50,22 @@ In your Adobe Commerce Storefront boilerplate repo, locate config.json and add t
 ```
 
 1. **api-mesh-endpoint**: The endpoint URL provided by the Klaviyo Adobe Commerce App Builder app.
-2. **klaviyo.profileList.sms** & **klaviyo.profileList.email**: identifier of SMS and email list in the Klaviyo admin. **Admin** > **List & segments** > *Select SMS or email list > *See the URL for the identifier ```https://www.klaviyo.com/list/SKkG48```.
+   - In the App builder side, there will be another instructions on how to setup the Klaviyo credentials 
+2. **klaviyo.profileList.sms** & **klaviyo.profileList.email**: identifier of SMS and email list in the Klaviyo admin. **Admin** > **List & segments** > *Select SMS or email list > *See the URL for the identifier ```https://www.klaviyo.com/list/XXXXXX```.
 3. **klaviyo.consent.enable_sms_consent** & **klaviyo.consent.enable_email_consent**: disables either email or SMS checkbox based on the value provided.
 
 ### 2. Install the Drop-in
 
-The drop-in package is currently only available via GitHub packages and not in npmjs. Because of this, you will have to setup the following.
+The drop-in package is currently only available via [GitHub packages](https://github.com/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/pkgs/npm/klaviyo-adobe-commerce-app-checkout-consent-dropin) and not in npmjs. Because of this, you will have to setup the following.
 
 1. In your GitHub, go to **Settings** > **Developer Settings** > **Personal Access Token** > **Tokens (classic)**.
 2. Generate a new personal access token (classic) with atleast the scope of **read:packages** 
-3. Copy the generate token 
+3. Copy the generated token 
 4. In your terminal, run
    ```bash
    npm login --scope=@abovethefray --auth-type=legacy --registry=https://npm.pkg.github.com
    ```
-5. It will ask for your GitHub username and Password which will be your **GENERATED TOKEN**.
+5. It will ask for your GitHub username and password which will be your **GENERATED PERSONAL TOKEN**.
 6. After success you should be able to run
    ```bash
    npm install @abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin
