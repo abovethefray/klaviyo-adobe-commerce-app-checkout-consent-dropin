@@ -12,6 +12,9 @@ This drop-in adds 2 consent checkboxes (email and sms) in the checkout page whic
 - Klaviyo Adobe Commerce App Builder app
 - Klaviyo Account
 
+> [!NOTE]
+> Make sure that your Klaviyo app builder is set up and working properly before installing this drop-in (e.g. API mesh and Klaviyo credentials re working properly). Refer to the app builder installation instructions.
+
 ## Workflow
 
 1. After proceeding to checkout, the user can opt-in to check the consent boxes; email or sms.
@@ -159,6 +162,12 @@ You need to add the following styles in order to fix some of the display behavio
    display: none !important;
 }
 ```
+
+### 4. Test Changes Localally
+   ```bash
+   npm start
+   ```
+
 
 ## SMS Consent
 

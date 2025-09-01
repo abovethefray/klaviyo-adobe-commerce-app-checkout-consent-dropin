@@ -66,9 +66,10 @@ export const KlaviyoApiCreateUpdate = async (
   let checkIfEmailExists = await checkIfEmailExist(checkoutData.email, meshApiPoint);
   let profile = null;
   let profileId = null;
+  let profileNumber = null;
 
   if (checkIfEmailExists.GetProfileByEmail.data.length <= 0) {
-    let data = restructureCustomerObject(checkoutData, addressData, null, null, null, true);
+    let data = restructureCustomerObject(checkoutData, addressData, null, null, null, true, profileNumber);
     let newProfile = await createProfile(data, meshApiPoint);
 
     if (Object.keys(newProfile.createProfile).length > 0) {
@@ -81,11 +82,15 @@ export const KlaviyoApiCreateUpdate = async (
   let subscribeData = [];
   if (profile && Object.keys(profile.id).length > 0) {
     profileId = profile.id;
+
+    if (Object.keys(profile.attributes.phone_number).length > 0) {
+      profileNumber = profile.attributes.phone_number;
+    }
   }
 
   if (profileId) {
     if (emailConsent) {
-      let data = restructureCustomerObject(checkoutData, addressData, 'email', profileId, emailListCode);
+      let data = restructureCustomerObject(checkoutData, addressData, 'email', profileId, emailListCode, profileNumber);
 
       if (Object.keys(data).length > 0) {
         subscribeData.push(data);
@@ -93,7 +98,7 @@ export const KlaviyoApiCreateUpdate = async (
     }
 
     if (smsConsent) {
-      let data = restructureCustomerObject(checkoutData, addressData, 'sms', profileId, smsListCode);
+      let data = restructureCustomerObject(checkoutData, addressData, 'sms', profileId, smsListCode, profileNumber);
 
       if (Object.keys(data).length > 0) {
         subscribeData.push(data);
@@ -129,13 +134,14 @@ const restructureCustomerObject = (
     consentIdentifier: null|string,
     profileId: null|string,
     code: null|string,
-    create: boolean = false
+    create: boolean = false,
+    profileNumber: null|string
 ): object => {
   let subscriptions = {};
   let relationships = {};
   let addressDataAttributes = addressData.data;
   let data = {};
-  let phone = convertPhoneFormat(addressDataAttributes.telephone);
+  let phone = profileNumber ?? convertPhoneFormat(addressDataAttributes.telephone);
 
   if (create) {
     data = {
