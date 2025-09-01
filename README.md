@@ -57,7 +57,23 @@ In your Adobe Commerce Storefront boilerplate repo, locate config.json and add t
 2. **klaviyo.profileList.sms** & **klaviyo.profileList.email**: identifier of SMS and email list in the Klaviyo admin. **Admin** > **List & segments** > *Select SMS or email list > *See the URL for the identifier ```https://www.klaviyo.com/list/XXXXXX```.
 3. **klaviyo.consent.enable_sms_consent** & **klaviyo.consent.enable_email_consent**: disables either email or SMS checkbox based on the value provided.
 
-### 2. Install the Drop-in
+### 2. Update package.json
+
+Due to the current deployment structure, you cannot directly import files from the node_modules as it will fail in live site (Will work in local). Because of this, we need to create a custom command to sync our drop-in package in the ```scripts/__dropins__``` folder. Update this code:
+
+```json
+"postinstall": "npm run install:dropins",
+"postupdate": "npm run install:dropins"
+```
+to this:
+
+```json
+"dropins:sync": "mkdir -p scripts/__dropins__/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin && rsync -a --delete node_modules/@abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/ scripts/__dropins__/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin",
+"postinstall": "npm run install:dropins && npm run dropins:sync",
+"postupdate": "npm run install:dropins && npm run dropins:sync"
+```
+
+### 3. Install the Drop-in
 
 The drop-in package is currently registered to npmjs. You can directly run npm install to download the package.
 
@@ -68,14 +84,25 @@ The drop-in package is currently registered to npmjs. You can directly run npm i
 > [!NOTE]
 > Make sure the @abovethefray scope is pointing to npmjs. (This is by default)
 
-### 3. Update commerce checkout block JS file from the boilerplate
+### 4. Run postinstall Command
+
+As what have mentioned above, you need to sync the drop-in package into the ```scripts/__dropins__``` folder. In order to do so, you need to run:
+
+```bash
+npm run postinstall
+```
+
+This will create a new folder under ```scripts/__dropins__```. This will be the files that we will be importing on the JS blocks. (You also need to commit this files)
+
+### 4. Update Commerce Checkout Block JS File from the Boilerplate
 
 Currently, there is no other way to install the drop-in without updating the file where you want the drop-in to display. You have to manually import and configure the file. Locate the file ```blocks/commerce-checkout/commerce-checkout.js```.
 
-1. Import the drop-in container
+1. Import the drop-in container. Find the ```import { getUserTokenCookie } from '../../scripts/initializers/index.js';``` and insert this code above it.
    - ```js
      // Klaviyo
-     import { KlaviyoCheckoutConsentContainer, KlaviyoApiCreateUpdate } from '../../node_modules/@abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/dist/containers/KlaviyoCheckoutConsentContainer.js';
+     import { KlaviyoCheckoutConsentContainer, KlaviyoApiCreateUpdate } from '../../scripts/__dropins__/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/dist/containers/KlaviyoCheckoutConsentContainer.js';
+     import { getUserTokenCookie } from '../../scripts/initializers/index.js'; //native import declaration
      ```
 2. Add an element to hook the container into. In **line 148** you will see the element structure. Insert the code below between **checkout__billing-form** & **checkout__terms-and-conditions**
    - ```html
