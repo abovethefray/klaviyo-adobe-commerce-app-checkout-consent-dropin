@@ -83,7 +83,7 @@ export const KlaviyoApiCreateUpdate = async (
   if (profile && Object.keys(profile.id).length > 0) {
     profileId = profile.id;
 
-    if (Object.keys(profile.attributes.phone_number).length > 0) {
+    if (Object.keys(profile.attributes).length > 0 && profile.attributes.phone_number) {
       profileNumber = profile.attributes.phone_number;
     }
   }
