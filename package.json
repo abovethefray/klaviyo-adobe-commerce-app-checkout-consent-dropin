@@ -1,6 +1,6 @@
 {
   "name": "@abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "engines": {
     "node": "^20.0.0 || ^22.0.0"

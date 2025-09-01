@@ -59,20 +59,14 @@ In your Adobe Commerce Storefront boilerplate repo, locate config.json and add t
 
 ### 2. Install the Drop-in
 
-The drop-in package is currently only available via [GitHub packages](https://github.com/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/pkgs/npm/klaviyo-adobe-commerce-app-checkout-consent-dropin) and not in npmjs. Because of this, you will have to setup the following.
+The drop-in package is currently registered to npmjs. You can directly run npm install to download the package.
 
-1. In your GitHub, go to **Settings** > **Developer Settings** > **Personal Access Token** > **Tokens (classic)**.
-2. Generate a new personal access token (classic) with atleast the scope of **read:packages** 
-3. Copy the generated token 
-4. In your terminal, run
-   ```bash
-   npm login --scope=@abovethefray --auth-type=legacy --registry=https://npm.pkg.github.com
-   ```
-5. It will ask for your GitHub username and password which will be your **GENERATED PERSONAL TOKEN**.
-6. After success you should be able to run
-   ```bash
+```bash
    npm install @abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin
-   ```
+```
+
+> [!NOTE]
+> Make sure the @abovethefray scope is pointing to npmjs. (This is by default)
 
 ### 3. Update commerce checkout block JS file from the boilerplate
 
