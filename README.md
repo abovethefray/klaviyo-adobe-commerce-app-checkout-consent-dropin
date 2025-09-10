@@ -68,7 +68,7 @@ Due to the current deployment structure, you cannot directly import files from t
 to this:
 
 ```json
-"dropins:sync": "mkdir -p scripts/__dropins__/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin && rsync -a --delete node_modules/@abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin/ scripts/__dropins__/abovethefray/klaviyo-adobe-commerce-app-checkout-consent-dropin",
+"dropins:sync": "mkdir -p scripts/__dropins__/abovethefray && rsync -a --delete node_modules/@abovethefray/ scripts/__dropins__/abovethefray",
 "postinstall": "npm run install:dropins && npm run dropins:sync",
 "postupdate": "npm run install:dropins && npm run dropins:sync"
 ```
@@ -92,7 +92,10 @@ As what have mentioned above, you need to sync the drop-in package into the ```s
 npm run postinstall
 ```
 
-This will create a new folder under ```scripts/__dropins__```. This will be the files that we will be importing on the JS blocks. (You also need to commit this files)
+This will create a new folder under ```scripts/__dropins__```. This will be the files that we will be importing on the JS blocks.
+
+> [!NOTE]
+> As of this moment, the automated deployer cannot seem to write the files generated from automated deploy command (npm ci). This probably have something to do with security risk. As of now, same with other drop-ins, we need to commit the files locally generated in scripts/__dropin\_\_/abovethefray.
 
 ### 4. Update Commerce Checkout Block JS File from the Boilerplate
 
