@@ -90,7 +90,7 @@ export const KlaviyoApiCreateUpdate = async (
 
   if (profileId) {
     if (emailConsent) {
-      let data = restructureCustomerObject(checkoutData, addressData, 'email', profileId, emailListCode, profileNumber);
+      let data = restructureCustomerObject(checkoutData, addressData, 'email', profileId, emailListCode, false, profileNumber);
 
       if (Object.keys(data).length > 0) {
         subscribeData.push(data);
@@ -98,7 +98,7 @@ export const KlaviyoApiCreateUpdate = async (
     }
 
     if (smsConsent) {
-      let data = restructureCustomerObject(checkoutData, addressData, 'sms', profileId, smsListCode, profileNumber);
+      let data = restructureCustomerObject(checkoutData, addressData, 'sms', profileId, smsListCode, false, profileNumber);
 
       if (Object.keys(data).length > 0) {
         subscribeData.push(data);
